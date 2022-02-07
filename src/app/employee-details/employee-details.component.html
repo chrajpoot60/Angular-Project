@@ -1,0 +1,50 @@
+<div class="container jumbotron jumbotron-fluid py-3 bg-secondary">
+    <div class="container">
+        <h1 class="display-4 text-center text-white">Employee Registration Form</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="container pt-3">
+            <app-employee-details-form></app-employee-details-form>
+        </div>
+        <div class="container py-5">
+            <h2 class="text-center">List of Employees</h2>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Date of Birth</th>`
+                        <th>Email Id</th>
+                        <th>Gender</th>
+                        <th>Address</th>
+                        <th>Pincode</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let ed of service.list">
+                        <td>{{ed.empName}}</td>
+                        <td>{{ed.dateOfBirth | date: 'MM/dd/yyyy'}}</td>
+                        <td></td>
+                        <td>{{ed.emailId}}</td>
+                        <div *ngIf="isTrue(ed.gender); else elseBlock"><td>Male</td></div>
+                        <ng-template #elseBlock><td>Female</td></ng-template>
+                        <!-- <td>{{ed.gender}}</td> -->
+                        <td>{{ed.address}}</td>
+                        <td>{{ed.pincode}}</td>
+                        <td>
+                            <button (click)="populateForm(ed)">Edit</button>
+                        </td>
+                        <td>
+                            <button (click)="onDelete(ed.empId)">Delete</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

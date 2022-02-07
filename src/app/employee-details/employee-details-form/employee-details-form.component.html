@@ -1,0 +1,46 @@
+<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+    <input type="hidden" name="empId" [value]="service.formData.empId" />
+    <div class="row">
+        <div class="form-group col-md-4">
+           <!--template or refrence variable use here for validation and refrering to directive "ngModel"-->
+           
+            <input class="form-control form-control-lg " style="border-bottom-color: black;" placeholder="Empoyee Name" name="empName" #empName="ngModel"
+               [(ngModel)]="service.formData.empName"
+               required [class.invalid]="empName.invalid && empName.touched">
+         </div>
+         <div class="form-group col-md-4"> 
+            <input class="form-control form-control-lg" style="border-bottom-color: black;" bsDatepicker  [maxDate] ="dateInstance" placeholder="Choose date of birth" name="dateOfBirth"
+               #dateOfBirth="ngModel" [(ngModel)]="service.formData.dateOfBirth" required maxlength="16" minlength="5" 
+               required [class.invalid]="dateOfBirth.invalid && dateOfBirth.touched" >
+         </div>
+         <div class="form-group col-md-4">
+            <input type="email" style="border-bottom-color: black;" class="form-control form-control-lg" placeholder="EmailId" name="emailId"
+               #emailId="ngModel" [(ngModel)]="service.formData.emailId" required maxlength="50" minlength="5"
+               required [class.invalid]="emailId.invalid && emailId.touched">
+         </div>
+    </div>
+    
+    <div class="row pt-3">   
+       <div class="form-group col-md-4">
+          <label>Gender</label>
+          <div class="form-check">
+              <input type="radio" style="border-bottom-color: black;" class="form-control-check" name="gender" value="1"[(ngModel)] ="service.formData.gender" checked
+                  #male="ngModel" required [class.invalid] ="male.invalid && male.touched">Male              
+               <input type = "radio" style="border-bottom-color: black;" class="form-control-check" name="gender" value="2" [(ngModel)] ="service.formData.gender"
+                  #female="ngModel" required [class.invalid]="female.invalid && female.touched">Female
+          </div>   
+       </div>
+       <div class="form-group col-4">
+            <input type="text" style="border-bottom-color: black;" class="form-control form-control-lg" name ="address" placeholder="Address" #address="ngModel" 
+                [(ngModel)] ="service.formData.address" required [class.invalid]="address.invalid && address.touched">
+       </div>
+       <div class="form-group col-4">
+           <input  type ="text" style="border-bottom-color: black;" class="form-control form-control-lg" name="pincode" placeholder="Pincode" #pincode="ngModel"
+            [(ngModel)] = "service.formData.pincode" required [class.invalid] ="pincode.invalid && pincode.touched"> 
+       </div>
+    </div>
+    <div class="form-group text-center py-3">
+       <button class="btn btn-info btn-lg btn-block" type="submit" [disabled] ="form.invalid">SUBMIT</button>
+       <button class ="btn btn-info btn-lg btn-clock" type="reset">RESET</button>
+    </div>
+ </form>
